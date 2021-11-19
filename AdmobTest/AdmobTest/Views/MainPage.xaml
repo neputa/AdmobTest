@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:MarcTron.Plugin.Controls;assembly=Plugin.MtAdmob"
+             x:Class="AdmobTest.Views.MainPage"
+             Title="{Binding Title}">
+
+    <StackLayout Orientation="Vertical" Spacing="0">
+
+        <StackLayout.Margin>
+            <OnPlatform x:TypeArguments="Thickness">
+              <On Platform="iOS" Value="0,20,0,0" />
+              <On Platform="Android" Value="0,0,0,0" />
+            </OnPlatform>
+        </StackLayout.Margin>
+
+        <Label 
+            Text="{Binding IsLoaded, StringFormat=ロード状況：{0}}" 
+            FontSize="Large"
+            HorizontalTextAlignment="Center"
+            VerticalTextAlignment="Center"
+            HeightRequest="200" />
+
+        <Button
+            Text="Interstitial広告をロード" 
+            Command="{Binding LoadCommand}" 
+            HeightRequest="50" />
+
+        <Button
+            Text="Interstitial広告のロード状況を確認" 
+            Command="{Binding IsLoadedCheckCommand}" 
+            HeightRequest="50" />
+
+        <Button 
+            Text="Interstitial広告を表示" 
+            Command="{Binding ShowCommand}" 
+            HeightRequest="50"/>
+
+        <!-- Place the Admob controls here -->
+        <controls:MTAdView
+            IsVisible="true" 
+            AdsId="{OnPlatform Android='ca-app-pub-3940256099942544/6300978111', iOS='ca-app-pub-3940256099942544/2934735716'}" 
+            VerticalOptions="EndAndExpand"
+            HorizontalOptions="FillAndExpand">
+            <controls:MTAdView.HeightRequest>
+                <x:OnIdiom>
+                    <x:OnIdiom.Phone>60</x:OnIdiom.Phone>
+                    <x:OnIdiom.Tablet>90</x:OnIdiom.Tablet>
+                    <x:OnIdiom.Desktop>90</x:OnIdiom.Desktop>
+                </x:OnIdiom>
+            </controls:MTAdView.HeightRequest>
+        </controls:MTAdView>
+
+    </StackLayout>
+
+</ContentPage>
